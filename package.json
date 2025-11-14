@@ -1,0 +1,77 @@
+{
+  "name": "kojo-content-mod",
+  "version": "2.0.0",
+  "description": "Advanced AI-powered content moderator for child safety",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node server.js",
+    "web": "node server.js",
+    "dev": "concurrently \"npm run bot\" \"npm run web\"",
+    "bot": "node bot.js",
+    "server": "node server.js",
+    "build": "echo 'Build complete'",
+    "test": "echo 'Tests would go here'",
+    "deploy": "echo 'Deploy script would go here'",
+    "bot:node20": "\".\\.node20\\\\node.exe\" bot.js",
+    "web:node20": "\".\\.node20\\\\node.exe\" server.js",
+    "dev:node20": "concurrently \"npm:bot:node20\" \"npm:web:node20\""
+  },
+  "keywords": [
+    "discord",
+    "ai",
+    "moderation",
+    "child-safety",
+    "content-filtering",
+    "machine-learning",
+    "natural-language-processing",
+    "computer-vision"
+  ],
+  "author": "Your Hackathon Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "dependencies": {
+    "@discordjs/opus": "^0.10.0",
+    "@discordjs/voice": "^0.19.0",
+    "@snazzah/davey": "^0.1.7",
+    "axios": "^1.13.2",
+    "cheerio": "^1.0.0-rc.12",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "discord.js": "^14.24.2",
+    "dotenv": "^16.6.1",
+    "express": "^4.18.2",
+    "ffmpeg-static": "^5.2.0",
+    "ffprobe-static": "^3.1.0",
+    "fluent-ffmpeg": "^2.1.3",
+    "helmet": "^7.1.0",
+    "i": "^0.3.7",
+    "libsodium-wrappers": "^0.7.15",
+    "mime-types": "^3.0.1",
+    "multer": "^1.4.5-lts.1",
+    "node-cron": "^3.0.2",
+    "node-schedule": "^2.1.1",
+    "npm": "^11.6.2",
+    "openai": "^4.104.0",
+    "prism-media": "^1.3.5",
+    "qrcode": "^1.5.4",
+    "sharp": "^0.32.6",
+    "sodium-native": "^5.0.7",
+    "wav": "^1.0.2",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DurellvicJardim/kojo-content-mod.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DurellvicJardim/kojo-content-mod/issues"
+  },
+  "homepage": "https://github.com/DurellvicJardim/kojo-content-mod#readme"
+}

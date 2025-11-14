@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Kojo – The Content Mod</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --kojo-blue: #6c8893;
+        --kojo-blue-dark: #5d737e;
+        --kojo-cream: #f5f0e6;
+        --kojo-cream-light: #faf6ed;
+        --kojo-accent: #d49252;
+        --kojo-accent-dark: #b97838;
+        --text-light: #fdfaf5;
+        --text-muted: #dde6ea;
+        --body-text: #f0f6f8;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        background: var(--kojo-blue);
+        color: var(--text-light);
+        scroll-behavior: smooth;
+      }
+
+      body {
+        line-height: 1.5;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+        height: auto; /* Ensure images scale proportionally */
+      }
+
+      /* ---------- NAV ---------- */
+
+      .top-nav {
+        position: fixed;
+        top: 0.75rem;
+        right: 1.5rem;
+        z-index: 20;
+        display: flex;
+        gap: 0.75rem;
+        padding: 0.35rem 0.75rem;
+        border-radius: 999px;
+        background: rgba(32, 45, 56, 0.95);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(16px);
+        max-width: 100%;
+        overflow-x: auto;
+      }
+
+      .top-nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .top-nav a {
+        padding: 0.45rem 0.9rem;
+        border-radius: 999px;
+        font-size: 0.85rem;
+        font-weight: 400;
+        color: var(--text-light);
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        white-space: nowrap;
+      }
+
+      .top-nav a:hover {
+        background: rgba(255, 255, 255, 0.16);
+      }
+
+      .top-nav a.nav-test {
+        background: #f4f0e8;
+        color: #314047;
+        font-weight: 500;
+        border-color: transparent;
+      }
+
+      .top-nav a.nav-test:hover {
+        background: #ffffff;
+      }
+
+      /* ---------- SECTIONS GENERAL ---------- */
+
+      main {
+        width: 100%;
+        overflow-x: hidden;
+      }
+
+      section {
+        padding: 6rem 8vw;
+        position: relative;
+      }
+
+      .section-blue {
+        background: var(--kojo-blue);
+        color: var(--body-text);
+      }
+
+      .section-cream {
+        background: var(--kojo-cream);
+        color: #4c646e;
+      }
+
+      .section-cream-light {
+        background: var(--kojo-cream-light);
+        color: #4c646e;
+      }
+
+      .section-inner {
+        max-width: 1120px;
+        margin: 0 auto;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-weight: 500;
+        letter-spacing: 0.02em;
+      }
+
+      h1.hero-title-main {
+        font-size: clamp(3rem, 5vw, 4.2rem);
+        line-height: 1.06;
+      }
+
+      h1.hero-title-sub {
+        font-size: clamp(2.4rem, 4vw, 3.2rem);
+        line-height: 1.06;
+      }
+
+      h2 {
+        font-size: clamp(2rem, 3vw, 2.6rem);
+        margin-bottom: 0.75rem;
+      }
+
+      p {
+        font-size: 0.98rem;
+        max-width: 40rem;
+      }
+
+      /* =========================
+   HERO SECTION
+   ========================= */
+      #hero {
+        position: relative;
+        min-height: 100vh;
+        padding-top: 7rem;
+        padding-bottom: 5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: var(--text-light);
+        overflow: hidden;
+        background: var(--kojo-blue-dark);
+      }
+
+      /* Background image overlay */
+      #hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url("images/Kojo-Full.svg") no-repeat center center;
+        background-size: cover;
+        opacity: 0.25; /* Adjust transparency */
+        z-index: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      /* Optional hover effect (can remove if not needed) */
+      #hero:hover::before {
+        opacity: 0.35;
+      }
+
+      /* Hero content */
+      #hero .hero-grid {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      /* Hero title */
+      #hero h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        line-height: 1.2;
+        color: #fff;
+        margin-bottom: 1rem;
+      }
+
+      /* Hero subtitle */
+      #hero p {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.85);
+        max-width: 700px;
+      }
+
+      /* Hero enter button */
+      .hero-enter-btn {
+        background: var(--kojo-accent);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 1rem 2.5rem;
+        font-size: 1.1rem;
+        font-weight: 500;
+        cursor: pointer;
+        margin-top: 1.5rem;
+        transition: background 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .hero-enter-btn:hover {
+        background: var(--kojo-accent-dark);
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        #hero {
+          padding-top: 6rem;
+          padding-bottom: 4rem;
+        }
+
+        #hero h1 {
+          font-size: 2.2rem;
+        }
+
+        #hero p {
+          font-size: 1rem;
+        }
+
+        .hero-enter-btn {
+          padding: 0.8rem 2rem;
+          font-size: 1rem;
+        }
+      }
+
+      /* ---------- ABOUT ---------- */
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+        gap: 3rem;
+        align-items: center;
+      }
+
+      .about-heading {
+        font-size: clamp(2.2rem, 3.3vw, 2.8rem);
+        margin-bottom: 1.2rem;
+      }
+
+      .about-text p {
+        color: var(--body-text);
+      }
+
+      .about-image-container {
+        position: relative; /* Enable positioning for child elements */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 220px; /* Maintain minimum height */
+        padding: 2.5rem 2.5rem 1.2rem; /* Maintain original padding */
+      }
+
+      .about-image {
+        max-width: 200%; /* Increased size */
+        max-height: 900px; /* Limit image height */
+        width: auto; /* Maintain aspect ratio */
+        object-fit: contain; /* Ensure image fits within bounds */
+        border-radius: 2rem; /* Match original blob border radius */
+        overflow: hidden; /* Ensure rounded corners are applied */
+        display: block; /* Ensure it behaves as a block element */
+      }
+
+      .about-kangaroo-overlay {
+        position: absolute;
+        bottom: 0; /* Position at the bottom */
+        right: 0; /* Position at the right */
+        max-width: 170px; /* Set a max width for the overlay */
+        margin: 1rem; /* Add some margin for spacing */
+        z-index: 1; /* Ensure it's above the background image */
+      }
+
+      /* ---------- TEST KOJO (CHAT) ---------- */
+
+      #test-kojo {
+        padding: 0; /* Remove section padding */
+        background-color: var(--kojo-cream-light); /* Ensure background color */
+      }
+
+      .test-container {
+        display: flex;
+        height: calc(
+          100vh - 12rem
+        ); /* Full viewport height minus section padding (6rem * 2) */
+        max-width: none; /* Remove max-width constraint */
+        margin: 0; /* Remove margin */
+        width: 100%; /* Ensure full width */
+      }
+
+      .test-sidebar {
+        background-color: #d4c4b0; /* New design color */
+        width: 30%; /* 30% width */
+        padding: 60px 40px; /* New design padding */
+        display: flex;
+        align-items: center; /* Center content vertically */
+        justify-content: center; /* Center content horizontally */
+        box-sizing: border-box;
+      }
+
+      .test-sidebar h2 {
+        font-size: 4rem; /* New design font size */
+        font-weight: 300; /* New design font weight */
+        color: #7a9bb8; /* New design color */
+        line-height: 0.9; /* New design line height */
+        letter-spacing: -0.02em; /* New design letter spacing */
+        margin: 0; /* Remove default margin */
+        text-align: center; /* Center the text */
+      }
+
+      .test-chat-area {
+        width: 70%; /* 70% width */
+        background-color: #f5f3f0; /* New design color */
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* New Chat Styles */
+      .chat-messages {
+        flex: 1;
+        padding: 40px 30px; /* New design padding */
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 20px; /* New design gap */
+      }
+
+      .message {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px; /* New design gap */
+      }
+
+      .bot-message {
+        align-self: flex-start; /* New design alignment */
+      }
+
+      .user-message {
+        align-self: flex-end; /* New design alignment */
+        flex-direction: row-reverse; /* New design direction */
+      }
+
+      .avatar {
+        width: 40px; /* New design size */
+        height: 40px; /* New design size */
+        border-radius: 50%; /* New design shape */
+        overflow: hidden;
+        flex-shrink: 0; /* Prevent shrinking */
+      }
+
+      .avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Cover the avatar area */
+      }
+
+      .user-avatar {
+        width: 40px; /* New design size */
+        height: 40px; /* New design size */
+        background-color: #7a9bb8; /* New design color */
+        border-radius: 50%; /* New design shape */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white; /* Icon color */
+        flex-shrink: 0; /* Prevent shrinking */
+      }
+
+      .user-avatar svg {
+        width: 20px; /* New design icon size */
+        height: 20px;
+      }
+
+      .message-bubble {
+        background-color: #c8a882; /* New design color */
+        color: white; /* New design text color */
+        padding: 16px 20px; /* New design padding */
+        border-radius: 20px; /* New design radius */
+        max-width: 400px; /* New design max width */
+        font-size: 14px; /* New design font size */
+        line-height: 1.4; /* New design line height */
+        word-wrap: break-word; /* Break long words */
+      }
+
+      .user-message .message-bubble {
+        background-color: #c8a882; /* New design color for user bubble */
+        border-radius: 20px; /* New design radius */
+      }
+
+      /* When Kojo moderates a user's message */
+      .message.user-message.moderated-message .message-bubble {
+        background-color: #fee2e2; /* pale red bubble */
+        color: #b91c1c; /* dark red text */
+        border: 1px solid #f87171; /* red border */
+        text-decoration: line-through;
+      }
+
+      .input-area {
+        padding: 20px 30px; /* New design padding */
+        display: flex;
+        align-items: center;
+        gap: 12px; /* New design gap */
+        background-color: #f5f3f0; /* Match chat area background */
+      }
+
+      .add-button {
+        width: 44px; /* New design size */
+        height: 44px; /* New design size */
+        border-radius: 50%; /* New design shape */
+        background-color: #c8a882; /* New design color */
+        border: none;
+        color: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0; /* Prevent shrinking */
+        transition: background-color 0.2s; /* Smooth transition */
+      }
+
+      .add-button:hover {
+        background-color: #b8956f; /* Hover color */
+      }
+
+      .add-button svg {
+        width: 20px; /* New design icon size */
+        height: 20px;
+      }
+
+      .message-input {
+        flex: 1; /* Take up remaining space */
+        padding: 12px 16px; /* New design padding */
+        border: 2px solid #c8a882; /* New design border */
+        border-radius: 25px; /* New design radius */
+        background-color: white; /* Input background */
+        font-size: 14px; /* New design font size */
+        outline: none; /* Remove default outline */
+        transition: border-color 0.2s; /* Smooth transition */
+      }
+
+      .message-input:focus {
+        border-color: #b8956f; /* Focus border color */
+      }
+
+      .send-button {
+        background-color: #c8a882; /* New design color */
+        color: white; /* New design text color */
+        border: none;
+        padding: 12px 20px; /* New design padding */
+        border-radius: 25px; /* New design radius */
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px; /* New design gap */
+        font-size: 14px; /* New design font size */
+        font-weight: 500; /* New design font weight */
+        transition: background-color 0.2s; /* Smooth transition */
+      }
+
+      .send-button:hover {
+        background-color: #b8956f; /* Hover color */
+      }
+
+      .send-button svg {
+        width: 16px; /* New design icon size */
+        height: 16px;
+      }
+
+      .tech-list {
+        list-style: none;
+        padding-left: 0;
+        margin: 0;
+      }
+
+      .tech-list li {
+        margin-bottom: 8px;
+        padding-left: 20px;
+        position: relative;
+      }
+
+      .tech-list li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: #c8a882; /* matches your beige/gold accent */
+        font-weight: bold;
+      }
+
+      /* Responsive adjustments for the new chat design */
+      @media (max-width: 900px) {
+        .test-container {
+          flex-direction: column; /* Stack on mobile */
+          height: auto; /* Auto height on mobile */
+        }
+
+        .test-sidebar {
+          width: 100%; /* Full width on mobile */
+          padding: 40px 20px; /* Adjust padding */
+          min-height: 200px; /* Ensure some height */
+        }
+
+        .test-chat-area {
+          width: 100%; /* Full width on mobile */
+        }
+
+        .test-sidebar h2 {
+          font-size: 3rem; /* New design font size on mobile */
+        }
+
+        .chat-messages {
+          padding: 20px 15px; /* New design padding on mobile */
+        }
+
+        .input-area {
+          padding: 15px; /* New design padding on mobile */
+        }
+
+        .message-bubble {
+          max-width: 280px; /* New design max width on mobile */
+        }
+      }
+
+      @media (max-width: 480px) {
+        .test-sidebar {
+          padding: 30px 15px; /* Adjust padding */
+        }
+
+        .test-sidebar h2 {
+          font-size: 2.2rem; /* New design font size on smaller mobile */
+        }
+
+        .message-bubble {
+          max-width: 220px; /* New design max width on smaller mobile */
+          font-size: 13px; /* New design font size on smaller mobile */
+        }
+      }
+
+      /* ---------- WHAT / HOW ---------- */
+
+      .what-how-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Two equal columns */
+        gap: 3rem;
+        align-items: start; /* Align content to the top */
+      }
+
+      .what-how-image {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto; /* Center the image within its grid cell if needed */
+      }
+
+      /* ---------- FUTURE ---------- */
+
+      .future-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 0.4fr) minmax(0, 1fr); /* Adjusted ratio for more space for text */
+        gap: 3rem;
+        align-items: center;
+      }
+
+      .future-kangaroo {
+        width: 800px; /* Increased size */
+        margin: 0 auto; /* Center image if needed within its grid cell */
+        display: block; /* Ensure it behaves as a block element */
+      }
+
+      /* ---------- TEAM ---------- */
+
+      .team-heading {
+        margin-bottom: 2.5rem;
+      }
+
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 2rem;
+      }
+
+      .team-card {
+        text-align: left;
+      }
+
+      .team-photo-wrap {
+        width: 100%;
+        aspect-ratio: 4 / 5;
+        border-radius: 999px 999px 32px 32px;
+        overflow: hidden;
+        margin-bottom: 0.9rem;
+      }
+
+      .team-photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .team-name {
+        font-size: 1.05rem;
+        font-weight: 500;
+        margin-bottom: 0.3rem;
+        color: var(--text-light);
+      }
+
+      .team-bio {
+        font-size: 0.86rem;
+        color: var(--body-text);
+        margin-bottom: 0.8rem;
+      }
+
+      .team-icons {
+        display: flex;
+        gap: 0.6rem;
+        font-size: 1.05rem;
+        color: var(--body-text);
+      }
+
+      .team-icon-circle {
+        width: 26px;
+        height: 26px;
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+      }
+
+      .team-icon-circle img.team-icon-img {
+        width: 18px;
+        height: 18px;
+        display: block;
+      }
+
+      /* ---------- POLAROID ---------- */
+
+      .polaroid-wrapper {
+        display: flex;
+        justify-content: center;
+      }
+
+      .polaroid {
+        background: #ffffff;
+        padding: 1rem 1rem 1.4rem;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+        text-align: center;
+        max-width: 420px;
+      }
+
+      .polaroid img {
+        width: 100%;
+        display: block;
+        margin-bottom: 0.9rem;
+      }
+
+      .polaroid-title {
+        font-size: 1.05rem;
+        margin-bottom: 0.1rem;
+      }
+
+      .polaroid-sub {
+        font-size: 0.9rem;
+        margin-bottom: 0.1rem;
+      }
+
+      .polaroid-meta {
+        font-size: 0.75rem;
+      }
+
+      /* ---------- FOOTER ---------- */
+      .footer {
+        background-color: var(--kojo-blue-dark);
+        color: var(--text-light);
+        padding: 2rem 8vw;
+        text-align: center; /* Center the text */
+        width: 100%; /* Ensure full width */
+      }
+
+      /* ---------- RESPONSIVE ---------- */
+
+      @media (max-width: 900px) {
+        .hero-grid,
+        .about-grid,
+        .test-container, /* Added test-container */
+        .what-how-grid, /* Added what-how-grid */
+        .future-grid,
+        .team-grid {
+          grid-template-columns: 1fr;
+        }
+
+        #hero {
+          padding-top: 6rem;
+          background-position: center bottom 1.5rem;
+          background-size: 260px auto;
+        }
+
+        .top-nav {
+          left: 50%;
+          transform: translateX(-50%);
+          right: auto;
+          gap: 0.4rem;
+          padding-inline: 0.6rem;
+        }
+
+        .top-nav a {
+          font-size: 0.78rem;
+          padding: 0.4rem 0.7rem;
+        }
+
+        .test-sidebar {
+          width: 100%; /* Full width on mobile */
+          padding: 40px 20px; /* Adjust padding */
+          min-height: 200px; /* Ensure some height */
+        }
+
+        .test-chat-area {
+          width: 100%; /* Full width on mobile */
+        }
+
+        .test-sidebar h2 {
+          font-size: 3rem; /* New design font size on mobile */
+        }
+
+        .chat-messages {
+          padding: 20px 15px; /* New design padding on mobile */
+        }
+
+        .input-area {
+          padding: 15px; /* New design padding on mobile */
+        }
+
+        .message-bubble {
+          max-width: 280px; /* New design max width on mobile */
+        }
+
+        .future-kangaroo {
+          width: 100%; /* Make it full width on mobile, respecting max-width */
+          max-width: 300px; /* Smaller size on mobile */
+        }
+
+        .team-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .chat-window {
+          max-height: 280px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        section {
+          padding-inline: 6vw;
+        }
+
+        .hero-grid {
+          gap: 2rem;
+        }
+
+        .team-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .test-chat-area {
+          padding: 2rem 1.25rem 1.75rem;
+        }
+
+        .chat-window {
+          max-height: 260px;
+        }
+
+        .chat-input-row {
+          gap: 0.6rem;
+        }
+
+        .file-btn {
+          width: 34px;
+          height: 34px;
+          font-size: 1.3rem;
+        }
+
+        .chat-input {
+          font-size: 0.9rem;
+        }
+
+        .send-btn {
+          padding: 0.6rem 1.3rem;
+          font-size: 0.83rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav class="top-nav">
+      <a href="#what-is-kojo">What is Kojo?</a>
+      <a href="#future">The Future</a>
+      <a href="#team">The Team</a>
+      <a href="#test-kojo" class="nav-test">Test Kojo</a>
+    </nav>
+
+    <main>
+      <!-- HERO -->
+      <section id="hero">
+        <div class="section-inner hero-grid">
+          <div>
+            <div class="hero-eyebrow">Welcome to</div>
+            <div class="hero-title">
+              <h1 class="hero-title-main">Kojo</h1>
+              <h1 class="hero-title-sub">The Content Mod</h1>
+            </div>
+            <button
+              class="hero-enter-btn"
+              onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})"
+            >
+              About Kojo
+            </button>
+          </div>
+          <!-- hero-kangaroo-wrapper is hidden via CSS; background is used instead -->
+          <div class="hero-kangaroo-wrapper">
+            <img
+              src="images/Kojo-Full.svg"
+              alt="Kojo the Content Mod kangaroo illustration"
+              class="hero-kangaroo"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" class="section-blue">
+        <div class="section-inner about-grid">
+          <div class="about-text">
+            <h2 class="about-heading">About Kojo The Content Mod</h2>
+
+            <p>
+              Kojo is an AI-powered content moderation system built to protect
+              online communities in real time. It analyses text, images, videos,
+              audio, and URLs through multi-layered safety models which are
+              currently designed to protect online spaces where children are
+              involved (U17). Kojo detects harmful behaviour before it
+              escalates, flags risky patterns, and explains every moderation
+              decision with transparent reasoning.
+            </p>
+            <br />
+            <p>
+              Kojo works currently works on Discord and the web, with plans to
+              expand. It identifies grooming, harassment, hate, self-harm,
+              violent content, explicit sexual material, scams, malware, and
+              dangerous acts. When needed, Kojo can escalate, time-out users, or
+              automatically remove messages while keeping moderators informed
+              through detailed incident reports.
+            </p>
+            <br />
+            <p>
+              Unlike keyword-based filters that create false positives or miss
+              things entirely, Kojo is able to focus on intent and context. It
+              tries to understand nuance, evaluate tone, and separate legitimate
+              conversation from harmful behaviour so communities stay safe
+              without punishing normal discussion.
+            </p>
+            <br />
+            <p>
+              Kojo’s goal is simple: reduce harm, support moderators, and make
+              online spaces safer without getting in the way of genuine
+              interaction.
+            </p>
+          </div>
+
+          <div class="about-image-container">
+            <img
+              src="images/grad.png"
+              alt="Kojo safety example"
+              class="about-image"
+            />
+            <img
+              src="images/Kojo-Head.svg"
+              alt="Kojo kangaroo head"
+              class="about-kangaroo-overlay"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- TEST KOJO / CHAT DEMO -->
+      <section id="test-kojo" class="section-cream-light">
+        <div class="test-container">
+          <!-- Removed .section-inner -->
+          <aside class="test-sidebar">
+            <h2>Test<br />Kojo</h2>
+          </aside>
+          <div class="test-chat-area">
+            <div class="chat-messages" id="chat-window">
+              <div class="message bot-message">
+                <div class="avatar">
+                  <img src="images/Kojo-Head.svg" alt="Kojo avatar" />
+                </div>
+                <div class="message-bubble">
+                  Hi! I'm Kojo. Send a message and I'll either respond or remove
+                  it.
+                </div>
+              </div>
+            </div>
+
+            <div class="input-area">
+              <button
+                class="add-button"
+                id="file-input-btn"
+                title="Attach image / video / audio"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 5v14M5 12h14"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+
+              <!-- Hidden file input for images, videos and audio -->
+              <input
+                type="file"
+                id="file-input"
+                accept="image/*,video/*,audio/*"
+                style="display: none"
+              />
+
+              <input
+                id="chat-input"
+                class="message-input"
+                type="text"
+                placeholder="Type a message to Kojo..."
+              />
+              <button class="send-button" id="send-btn">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                Send
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- WHAT / HOW -->
+      <section id="what-is-kojo" class="section-blue">
+        <div class="section-inner what-how-grid">
+          <div>
+            <h2>What is Kojo?</h2>
+            <p>
+              Kojo is an AI-driven moderation tool designed to protect
+              communities. Instead of relying on simple keyword filters, Kojo
+              analyses text, links, images, videos, audio, and voice activity to
+              understand intent, context, tone, and risk. It is built to detect
+              grooming, harassment, hate, explicit sexual content, violence,
+              self-harm, scams, malware, and other high-risk behaviour before it
+              escalates.
+            </p>
+
+            <br />
+
+            <h2>How Does Kojo Work?</h2>
+            <p>
+              Kojo is invited into your online community like any other bot.
+              Once granted moderation privileges, Kojo monitors text channels,
+              media uploads, links shared by users, and—if your community has
+              public voice channels—Kojo also monitors voice activity in real
+              time.
+            </p>
+
+            <br />
+
+            <p>
+              Every message, link, or media file is processed through a layered
+              moderation pipeline. Kojo classifies the level of risk, determines
+              the appropriate action, and generates a transparent explanation
+              for moderators. Depending on severity, Kojo may allow the content,
+              warn the user, delete the message, apply timeouts, or escalate
+              immediately for high-risk incidents such as grooming or
+              personal-information solicitation.
+            </p>
+
+            <br />
+
+            <p>
+              All moderation decisions are logged as detailed incident reports
+              for human moderators. These reports include the category,
+              severity, reasoning, confidence score, and any follow-up
+              suggestions. The public web demo uses the same moderation
+              pipeline, allowing anyone to submit messages or media and see
+              exactly how Kojo would respond inside a real Discord server.
+            </p>
+
+            <br />
+
+            <h2>Tech Stack</h2>
+
+            <ul class="tech-list">
+              <li><strong>Language:</strong> JavaScript (Node.js)</li>
+
+              <li>
+                <strong>Discord Bot:</strong> Discord.js, Node.js, FFmpeg,
+                OpenAI API
+              </li>
+
+              <li>
+                <strong>Moderation Pipeline:</strong>
+                OpenAI (text, image, video, audio, URL analysis), GPT-based
+                classification models, transcription-based voice moderation,
+                frame-level video analysis
+              </li>
+
+              <li>
+                <strong>Backend (Web Demo):</strong>
+                Express.js, Node.js, Multer (file uploads), CORS, Dotenv
+              </li>
+
+              <li><strong>Media Processing:</strong> FFmpeg, Fluent-FFmpeg</li>
+
+              <li>
+                <strong>Frontend (Web Demo):</strong>
+                HTML, CSS, Vanilla JavaScript
+              </li>
+
+              <li>
+                <strong>Logging & Reporting:</strong>
+                Structured JSON incident reports, server-side logging, real-time
+                mod-channel event delivery
+              </li>
+
+              <li>
+                <strong>Infrastructure:</strong>
+                Local Node server, environment-based OpenAI key handling (.env)
+              </li>
+            </ul>
+
+            <p>
+              Kojo’s Discord bot and the public demo share the same moderation
+              logic to ensure consistent behaviour across both environments.
+            </p>
+          </div>
+
+          <div>
+            <img
+              src="images/Graphic.svg"
+              alt="Kojo workflow graphic"
+              class="what-how-image"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- FUTURE -->
+      <section id="future" class="section-cream">
+        <div class="section-inner future-grid">
+          <div>
+            <img
+              src="images/Kojo-Head.svg"
+              alt="Kojo kangaroo head"
+              class="future-kangaroo"
+            />
+          </div>
+
+          <div>
+            <h2>The Future</h2>
+            <p>
+              Kojo is built to work alongside human moderators, not replace
+              them. As the system grows, the goal is to expand beyond Discord
+              and the web demo into more online environments such as other
+              social platforms, forums, multiplayer gaming, and any digital
+              space where safe interaction matters.
+            </p>
+
+            <br />
+
+            <p>
+              Long term, systems like Kojo could provide real-time safety layers
+              for children’s games, public chat systems, and high-traffic online
+              spaces where traditional moderation tools simply cannot keep up.
+              The same multi-modal analysis used can be adapted for platforms
+              with different cultures, rules, and risk profiles.
+            </p>
+
+            <br />
+
+            <p>
+              Kojo is one part of a much larger shift in how online safety will
+              work in the future. We see AI-driven moderation as becoming
+              essential for detecting context, intent and harm at a scale manual
+              teams alone cannot handle. Our focus is to keep improving
+              accuracy, reduce false positives, and build tools that make
+              moderators more effective rather than replacing them entirely.
+            </p>
+
+            <br />
+
+            <p>
+              The future of moderation is hybrid! AI handling the heavy lifting,
+              humans making the final calls. Team Kojo aims to be a reliable
+              part of that future, helping communities stay safe no matter where
+              they exist online.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- TEAM -->
+      <section id="team" class="section-blue">
+        <div class="section-inner">
+          <h2 class="team-heading">Meet The Team</h2>
+          <div class="team-grid">
+            <div class="team-card">
+              <div class="team-photo-wrap">
+                <img
+                  src="images/durell.jpg"
+                  alt="Durell Jardim"
+                  class="team-photo"
+                />
+              </div>
+              <div class="team-name">Durell Jardim</div>
+              <p class="team-bio"></p>
+              <p class="team-bio"></p>
+              <p class="team-bio">
+                Works on the technical side of the project, building features,
+                connecting systems, and making sure everything runs smoothly
+                from backend to demo.
+              </p>
+
+              <div class="team-icons">
+                <a
+                  href="https://github.com/DurellvicJardim"
+                  class="team-icon-circle"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="images/github-mark.svg"
+                    alt="Kojo GitHub"
+                    class="team-icon-img"
+                  />
+                </a>
+
+                <a
+                  href="https://www.linkedin.com/in/durelljardim/"
+                  class="team-icon-circle"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="images/linkedin-svgrepo-com.svg"
+                    alt="Kojo LinkeIn"
+                    class="team-icon-img"
+                  />
+                </a>
+
+                <a
+                  href="mailto:durellvicjardim@gmail.com"
+                  class="team-icon-circle"
+                >
+                  <img
+                    src="images/email.svg"
+                    alt="Email the team"
+                    class="team-icon-img"
+                  />
+                </a>
+              </div>
+            </div>
+
+            <div class="team-card">
+              <div class="team-photo-wrap">
+                <img
+                  src="images/ethan.jpg"
+                  alt="Ethan Peters"
+                  class="team-photo"
+                />
+              </div>
+              <div class="team-name">Ethan Peters</div>
+              <p class="team-bio">
+                Focuses on the visual and front-end experience, working on
+                layouts, branding, and creating clean, user-friendly interfaces.
+              </p>
+
+              <div class="team-icons">
+                <a
+                  href="https://www.linkedin.com/in/ethan-xavier-7a29ba385/"
+                  class="team-icon-circle"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="images/linkedin-svgrepo-com.svg"
+                    alt="Kojo LinkeIn"
+                    class="team-icon-img"
+                  />
+                </a>
+
+                <a
+                  href="mailto:ethanxavier1905@outlook.com"
+                  class="team-icon-circle"
+                >
+                  <img
+                    src="images/email.svg"
+                    alt="Email the team"
+                    class="team-icon-img"
+                  />
+                </a>
+              </div>
+            </div>
+
+            <div class="team-card">
+              <div class="team-photo-wrap">
+                <img
+                  src="images/meg.jpg"
+                  alt="Megan Johnston"
+                  class="team-photo"
+                />
+              </div>
+              <div class="team-name">Megan Johnston</div>
+              <p class="team-bio">
+                Supports design and keeps the team organised by managing
+                planning, coordinating tasks, and helping the project stay on
+                track.
+              </p>
+
+              <div class="team-icons">
+                <a
+                  href="https://github.com/megantia"
+                  class="team-icon-circle"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="images/github-mark.svg"
+                    alt="Kojo GitHub"
+                    class="team-icon-img"
+                  />
+                </a>
+
+                <a
+                  href="https://www.linkedin.com/in/megan-johnston-7a243a299/"
+                  class="team-icon-circle"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="images/linkedin-svgrepo-com.svg"
+                    alt="Kojo LinkeIn"
+                    class="team-icon-img"
+                  />
+                </a>
+
+                <a
+                  href="mailto:meganjohnston100@gmail.com"
+                  class="team-icon-circle"
+                >
+                  <img
+                    src="images/email.svg"
+                    alt="Email the team"
+                    class="team-icon-img"
+                  />
+                </a>
+              </div>
+            </div>
+
+            <div class="team-card">
+              <div class="team-photo-wrap">
+                <img
+                  src="images/kat.jpg"
+                  alt="Katlego Raletsemo"
+                  class="team-photo"
+                />
+              </div>
+              <div class="team-name">Katlego Raletsemo</div>
+              <p class="team-bio">
+                Contributes feedback and direction throughout development,
+                helping guide discussions and offering input on decisions as the
+                project evolves.
+              </p>
+
+              <div class="team-icons">
+                <a
+                  href="https://www.linkedin.com/in/katlego-raletsemo-9a6b7a373/"
+                  class="team-icon-circle"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="images/linkedin-svgrepo-com.svg"
+                    alt="Kojo LinkeIn"
+                    class="team-icon-img"
+                  />
+                </a>
+
+                <a
+                  href="mailto:Katlegoraletsemo@gmail.com"
+                  class="team-icon-circle"
+                >
+                  <img
+                    src="images/email.svg"
+                    alt="Email the team"
+                    class="team-icon-img"
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- POLAROID -->
+      <section class="section-cream-light">
+        <div class="section-inner polaroid-wrapper">
+          <div class="polaroid">
+            <img src="images/Group.jpeg" alt="Team Kojo group photo" />
+            <div class="polaroid-title">Team Kojo <3</div>
+            <div class="polaroid-sub">Sat. 23 Aug 2025</div>
+            <div class="polaroid-meta">
+              1<sup>st</sup> Place Winners of the STADIO Hackathon
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p>&copy; 2025 Kojo. All rights reserved.</p>
+    </footer>
+
+    <!-- ---------- SIMPLE CHAT JS ---------- -->
+    <script>
+      const chatWindow = document.getElementById("chat-window");
+      const messageInput = document.getElementById("chat-input");
+      const sendButton = document.getElementById("send-btn");
+      const addButton = document.getElementById("file-input-btn");
+      const fileInput = document.getElementById("file-input");
+
+      const sessionId =
+        (crypto && crypto.randomUUID && crypto.randomUUID()) ||
+        "webdemo_" + Date.now() + "_" + Math.random().toString(16).slice(2);
+
+      let attachedFile = null;
+      let lastUserMessageEl = null;
+
+      function createMessage(text, isUser = false) {
+        const messageDiv = document.createElement("div");
+        messageDiv.className = `message ${
+          isUser ? "user-message" : "bot-message"
+        }`;
+
+        const bubble = document.createElement("div");
+        bubble.className = "message-bubble";
+        bubble.textContent = text;
+
+        if (isUser) {
+          const userAvatar = document.createElement("div");
+          userAvatar.className = "user-avatar";
+          userAvatar.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+          <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      `;
+          messageDiv.appendChild(bubble);
+          messageDiv.appendChild(userAvatar);
+        } else {
+          const avatar = document.createElement("div");
+          avatar.className = "avatar";
+          avatar.innerHTML = `<img src="images/Kojo-Head.svg" alt="Kojo avatar" />`;
+          messageDiv.appendChild(avatar);
+          messageDiv.appendChild(bubble);
+        }
+
+        return messageDiv;
+      }
+
+      function appendBotMessage(text) {
+        const botMessage = createMessage(text, false);
+        chatWindow.appendChild(botMessage);
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+        return botMessage;
+      }
+
+      function appendUserMessage(displayText) {
+        const userMessage = createMessage(displayText, true);
+        chatWindow.appendChild(userMessage);
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+        return userMessage;
+      }
+
+      async function sendMessage() {
+        const text = messageInput.value.trim();
+
+        if (!text && !attachedFile) return;
+
+        let displayText = text || "";
+        if (attachedFile) {
+          const fileLabel = `[Attached ${attachedFile.type.split("/")[0]}: ${
+            attachedFile.name
+          }]`;
+          displayText = displayText
+            ? `${displayText}\n${fileLabel}`
+            : fileLabel;
+        }
+
+        lastUserMessageEl = appendUserMessage(displayText);
+
+        messageInput.value = "";
+
+        const thinkingId = "kojo-thinking-" + Date.now();
+        const thinkingMessage = createMessage("Kojo is thinking...", false);
+        thinkingMessage.dataset.thinkingId = thinkingId;
+        chatWindow.appendChild(thinkingMessage);
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+
+        try {
+          let responseData;
+
+          if (attachedFile) {
+            const formData = new FormData();
+            const mime = attachedFile.type || "";
+            let endpoint = "";
+
+            if (mime.startsWith("image/")) {
+              endpoint = "/api/moderate-image";
+              formData.append("image", attachedFile);
+            } else if (mime.startsWith("video/")) {
+              endpoint = "/api/moderate-video";
+              formData.append("video", attachedFile);
+            } else if (mime.startsWith("audio/")) {
+              endpoint = "/api/moderate-audio";
+              formData.append("audio", attachedFile);
+            } else {
+              endpoint = "/api/moderate";
+            }
+
+            const res = await fetch(endpoint, {
+              method: "POST",
+              body: formData,
+            });
+            responseData = await res.json();
+          } else {
+            const res = await fetch("/api/moderate", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ message: text, sessionId }),
+            });
+            responseData = await res.json();
+          }
+
+          attachedFile = null;
+          if (fileInput) fileInput.value = "";
+
+          const kojoText =
+            responseData.kojo_response ||
+            responseData.response ||
+            "🤖 Kojo couldn't process this message. Please try again.";
+
+          thinkingMessage.remove();
+
+          // Decide if Kojo moderated this
+          const moderated =
+            responseData.was_moderated === true ||
+            responseData.moderated === true ||
+            responseData.safe === false;
+
+          if (moderated && lastUserMessageEl) {
+            lastUserMessageEl.classList.add("moderated-message");
+          }
+
+          appendBotMessage(kojoText);
+        } catch (err) {
+          console.error("Error talking to Kojo API:", err);
+          thinkingMessage.remove();
+          appendBotMessage(
+            "🤖 I'm having trouble connecting to my moderation server right now. Please try again in a bit."
+          );
+        }
+      }
+
+      sendButton.addEventListener("click", sendMessage);
+
+      messageInput.addEventListener("keypress", function (e) {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          sendMessage();
+        }
+      });
+
+      addButton.addEventListener("click", function () {
+        if (fileInput) {
+          fileInput.click();
+        }
+      });
+
+      fileInput.addEventListener("change", function (e) {
+        const file = e.target.files[0];
+        if (!file) {
+          attachedFile = null;
+          return;
+        }
+
+        attachedFile = file;
+
+        const hint = `Attached ${file.type.split("/")[0]} file: ${
+          file.name
+        }. Press Send to let Kojo analyse it.`;
+        const hintMessage = createMessage(hint, false);
+        chatWindow.appendChild(hintMessage);
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+      });
+
+      messageInput.focus();
+    </script>
+  </body>
+</html>

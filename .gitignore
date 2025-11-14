@@ -1,0 +1,51 @@
+# Node / backend
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-store/
+.npm/
+
+# Standalone Node runtimes
+.node*/
+node.exe
+
+# Environment / secrets
+.env
+.env.local
+.env.*
+*.env
+
+# Temp / uploads / generated
+uploads/
+tmp/
+temp/
+*.log
+logs/
+.cache/
+dist/
+build/
+coverage/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor / IDE
+.vscode/
+.idea/
+
+# Media binaries (ffmpeg, ffprobe, etc.)
+ffmpeg
+ffprobe
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Archives
+*.zip
+*.tar
+*.tar.gz
+*.7z
