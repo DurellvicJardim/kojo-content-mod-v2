@@ -39,6 +39,9 @@
         background: var(--kojo-blue);
         color: var(--text-light);
         scroll-behavior: smooth;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
       }
 
       body {
@@ -739,13 +742,20 @@
           left: 50%;
           transform: translateX(-50%);
           right: auto;
+          width: calc(100% - 1.5rem);
+          max-width: 100%;
           gap: 0.4rem;
           padding-inline: 0.6rem;
+          overflow-x: auto;
         }
 
         .top-nav a {
           font-size: 0.78rem;
           padding: 0.4rem 0.7rem;
+        }
+
+        .top-nav::-webkit-scrollbar {
+          display: none;
         }
 
         .test-sidebar {
@@ -826,6 +836,23 @@
         .send-btn {
           padding: 0.6rem 1.3rem;
           font-size: 0.83rem;
+        }
+
+        .input-area {
+          flex-wrap: wrap;
+        }
+
+        .message-input {
+          flex: 1 1 100%;
+        }
+
+        .send-button {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .add-button {
+          flex-shrink: 0;
         }
       }
     </style>
